@@ -1,0 +1,21 @@
+[build]
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "build"  # Adjust this if your publish directory is different
+
+[build.environment]
+  NODE_VERSION = "18.20.4"  # Specify the Node.js version you are using
+  NPM_FLAGS = "--legacy-peer-deps"  # Use legacy peer dependencies to bypass conflicts
+
+[context.production.environment]
+  NODE_ENV = "production"  # Ensure the build runs in production mode
+
+[context.deploy-preview]
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "build"
+
+[context.branch-deploy]
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = "build"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
